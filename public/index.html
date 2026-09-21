@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>یه سوال کوچولو برای آنیشکا 💌</title>
+  <meta name="description" content="سامانه دعوت خاص برای آنیشکا" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-blur"></div>
+  <div class="container">
+    <!-- Step 0: Intro -->
+    <section class="step active" id="step-0">
+      <div class="emoji-big">🥺</div>
+      <h1 class="title">یه سوال کوچولو 💌</h1>
+      <p class="subtitle">برای <span class="highlight">آنیشکای</span> عزیزم...</p>
+      <button class="btn primary" onclick="goTo(1)">شروع کن ✨</button>
+    </section>
+
+    <!-- Step 1: Will you go? -->
+    <section class="step" id="step-1">
+      <div class="emoji-big">💕</div>
+      <h2 class="title">آنیشکا خانوم...</h2>
+      <p class="question">با من میای سر قرار؟</p>
+      <p class="hint" id="step1-hint">فقط یه سوال ساده‌ست... جواب درست هم فقط یکیشه 😏</p>
+      <div class="btn-group" id="btn-group-yesno">
+        <button class="btn yes" id="btn-yes" onclick="answerYes()">آره 💕</button>
+        <button class="btn no" id="btn-no" type="button" onmouseover="runAwayNo()" onclick="return onNoClick(event)">نه</button>
+      </div>
+      <p class="no-message" id="no-message" style="display:none;"></p>
+    </section>
+
+    <!-- Step 2: Nickname -->
+    <section class="step" id="step-2">
+      <div class="emoji-big">🌸</div>
+      <h2 class="title">بهت حق انتخاب میدم که دوست داری اینجا چی صدا بشی دختر خوشگله</h2>
+      <p class="hint">یکی رو انتخاب کن یا خودت بنویس</p>
+      <div class="options-grid">
+        <button class="option" data-value="آیلین" onclick="selectOption(this, 'nickname')">آیلین</button>
+        <button class="option" data-value="آیلین شاجری" onclick="selectOption(this, 'nickname')">آیلین شاجری</button>
+        <button class="option" data-value="آنیا" onclick="selectOption(this, 'nickname')">آنیا</button>
+        <button class="option" data-value="آنیشکا" onclick="selectOption(this, 'nickname')">آنیشکا</button>
+        <button class="option" data-value="خانم شاجری" onclick="selectOption(this, 'nickname')">خانم شاجری</button>
+      </div>
+      <input type="text" id="custom-nickname" class="input" placeholder="یا خودت بنویس..." />
+      <button class="btn primary" onclick="nextFromNickname()">بعدی ✨</button>
+    </section>
+
+    <!-- Step 3: Date & Time -->
+    <section class="step" id="step-3">
+      <div class="emoji-big">📅</div>
+      <h2 class="title">کی وقت داریم؟</h2>
+      <p class="hint">یه تاریخ و ساعت خوب انتخاب کن</p>
+      <div class="form-group">
+        <label>تاریخ</label>
+        <input type="date" id="date-input" class="input" />
+      </div>
+      <div class="form-group">
+        <label>ساعت</label>
+        <div class="options-grid time-grid" id="time-options">
+          <button type="button" class="option" data-value="17:00" onclick="selectOption(this, 'time')">17:00</button>
+          <button type="button" class="option" data-value="17:15" onclick="selectOption(this, 'time')">17:15</button>
+          <button type="button" class="option" data-value="17:30" onclick="selectOption(this, 'time')">17:30</button>
+          <button type="button" class="option" data-value="17:45" onclick="selectOption(this, 'time')">17:45</button>
+          <button type="button" class="option" data-value="18:00" onclick="selectOption(this, 'time')">18:00</button>
+          <button type="button" class="option" data-value="18:15" onclick="selectOption(this, 'time')">18:15</button>
+          <button type="button" class="option" data-value="18:30" onclick="selectOption(this, 'time')">18:30</button>
+          <button type="button" class="option" data-value="18:45" onclick="selectOption(this, 'time')">18:45</button>
+          <button type="button" class="option" data-value="19:00" onclick="selectOption(this, 'time')">19:00</button>
+          <button type="button" class="option" data-value="19:15" onclick="selectOption(this, 'time')">19:15</button>
+          <button type="button" class="option" data-value="19:30" onclick="selectOption(this, 'time')">19:30</button>
+          <button type="button" class="option" data-value="19:45" onclick="selectOption(this, 'time')">19:45</button>
+          <button type="button" class="option full-width" data-value="با خودت هماهنگ میشم" onclick="selectOption(this, 'time')">با خودت هماهنگ میشم 😊</button>
+        </div>
+      </div>
+      <button class="btn primary" onclick="nextFromDate()">بعدی ✨</button>
+    </section>
+
+    <!-- Step 4: Place / Activity -->
+    <section class="step" id="step-4">
+      <div class="emoji-big">📍</div>
+      <h2 class="title">کجا بریم؟</h2>
+      <p class="hint">یه چی انتخاب کن درموردش تصمیم می‌گیریم</p>
+      <div class="options-grid">
+        <button type="button" class="option" data-value="کافه" onclick="selectOption(this, 'place')">☕ کافه</button>
+        <button type="button" class="option" data-value="رستوران" onclick="selectOption(this, 'place')">🍽️ رستوران</button>
+        <button type="button" class="option" data-value="طبیعت" onclick="selectOption(this, 'place')">⛰️ طبیعت (کوه و آب و دشت و...)</button>
+        <button type="button" class="option" data-value="پارک و پیاده‌روی" onclick="selectOption(this, 'place')">🌳 پارک و پیاده‌روی</button>
+        <button type="button" class="option" data-value="سینما" onclick="selectOption(this, 'place')">🎬 سینما</button>
+        <button type="button" class="option" data-value="کتابفروشی" onclick="selectOption(this, 'place')">📚 کتابفروشی</button>
+        <button type="button" class="option" data-value="خانه + فیلم" onclick="selectOption(this, 'place')">🏠 خانه + فیلم</button>
+        <button type="button" class="option" data-value="سورپرایز" onclick="selectOption(this, 'place')">🎁 سورپرایز</button>
+      </div>
+      <button class="btn primary" onclick="nextFromPlace()">بعدی ✨</button>
+    </section>
+
+    <!-- Step 5: Food -->
+    <section class="step" id="step-5">
+      <div class="emoji-big">🍽️</div>
+      <h2 class="title">چی میل داری؟</h2>
+      <p class="hint">یچی انتخاب کن ببینیم</p>
+      <div class="options-grid">
+        <button type="button" class="option" data-value="قهوه و کیک" onclick="selectOption(this, 'food')">☕ قهوه و کیک</button>
+        <button type="button" class="option" data-value="چای" onclick="selectOption(this, 'food')">🍵 چای</button>
+        <button type="button" class="option" data-value="تیرامیسو" onclick="selectOption(this, 'food')">🍰 تیرامیسو</button>
+        <button type="button" class="option" data-value="پیتزا" onclick="selectOption(this, 'food')">🍕 پیتزا</button>
+        <button type="button" class="option" data-value="پاستا" onclick="selectOption(this, 'food')">🍝 پاستا</button>
+        <button type="button" class="option" data-value="کباب و جوجه" onclick="selectOption(this, 'food')">🍢 کباب و جوجه</button>
+        <button type="button" class="option" data-value="یجی خودمون درست می‌کنیم" onclick="selectOption(this, 'food')">🍳 یجی خودمون درست می‌کنیم</button>
+        <button type="button" class="option" data-value="هیچی لازم نیست" onclick="selectOption(this, 'food')">هیچی لازم نیست</button>
+        <button type="button" class="option" data-value="هر چی تو بگی" onclick="selectOption(this, 'food')">😋 هر چی تو بگی</button>
+      </div>
+      <button class="btn primary" onclick="nextFromFood()">بعدی ✨</button>
+    </section>
+
+    <!-- Step 6: Message -->
+    <section class="step" id="step-6">
+      <div class="emoji-big">💬</div>
+      <h2 class="title">یه پیام کوچولو؟</h2>
+      <p class="hint">اگه چیزی می‌خوای بگی اینجا بنویس (اختیاری)</p>
+      <textarea id="message-input" class="input textarea" placeholder="مثلاً: منتظرتم... یا هر چی دلت خواست 💕" rows="4"></textarea>
+      <button class="btn primary" onclick="submitAll()">برو که رفتیم 💌</button>
+    </section>
+
+    <!-- Step Success -->
+    <section class="step" id="step-success">
+      <div class="emoji-big">🎉</div>
+      <h2 class="title">خوشحالم نگفتی نه!</h2>
+      <p class="question" id="success-text">پس آماده باش که میام دنبالت 🚗💨</p>
+      <p class="hint">برای اینکه یه لبخند کوچولو مهمون لبات کنم برات ساختمش، میخامت زیادااا 🙈</p>
+      <p class="hint">با این که کلا نه نمیتونستی بگی ولی خب مهم اینه که میبینمت!</p>
+      <div class="confetti" id="confetti"></div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
